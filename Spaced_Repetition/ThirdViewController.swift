@@ -117,52 +117,9 @@ var check = ""
     @IBAction func ShowCard(_ sender: Any) {
         
         cardNum = Int(NumCard.text!) ?? 0
-        let date = Date()
-        let calendar = Calendar.current
-        let year = calendar.component(.year, from: date)
-        let month = calendar.component(.month, from: date)
-        let day = calendar.component(.day, from: date)
-        let hour = calendar.component(.hour, from: date)
-        let minutes = calendar.component(.minute, from: date)
-
-        if UserDefaults.standard.integer(forKey: "Y\(cardNum)") < year
-        {
-            print("at Year")
-            UserDefaults.standard.set(0, forKey: "SR\(cardNum)")
-        }
-        else if UserDefaults.standard.integer(forKey: "Y\(cardNum)") == year
-        {
-            if UserDefaults.standard.integer(forKey: "M\(cardNum)") < month
-            {
-                print("at month")
-                UserDefaults.standard.set(0, forKey: "SR\(cardNum)")
-            }
-            else if UserDefaults.standard.integer(forKey: "M\(cardNum)") == month
-            {
-                if UserDefaults.standard.integer(forKey: "D\(cardNum)") < day
-                {
-                    print("at day")
-                    UserDefaults.standard.set(0, forKey: "SR\(cardNum)")
-                }
-                else if UserDefaults.standard.integer(forKey: "D\(cardNum)") == day
-                {
-                    if UserDefaults.standard.integer(forKey: "H\(cardNum)") < hour
-                    {
-                        print("at hour")
-                        UserDefaults.standard.set(0, forKey: "SR\(cardNum)")
-                    }
-                    else if UserDefaults.standard.integer(forKey: "H\(cardNum)") == hour
-                    {
-                        if UserDefaults.standard.integer(forKey: "Min\(cardNum)") < minutes
-                        {
-                            print("at minutes")
-                            UserDefaults.standard.set(0, forKey: "SR\(cardNum)")
-                        }
-                    }
-                }
-            }
-        }
         
+        getDateComponents()
+
             if UserDefaults.standard.integer(forKey: "SR\(cardNum)") == 0
             {
                
@@ -190,51 +147,8 @@ var check = ""
         
         cardNum += 1
         
-        let date = Date()
-        let calendar = Calendar.current
-        let year = calendar.component(.year, from: date)
-        let month = calendar.component(.month, from: date)
-        let day = calendar.component(.day, from: date)
-        let hour = calendar.component(.hour, from: date)
-        let minutes = calendar.component(.minute, from: date)
+        getDateComponents()
         
-        if UserDefaults.standard.integer(forKey: "Y\(cardNum)") < year
-        {
-            print("at Year")
-            UserDefaults.standard.set(0, forKey: "SR\(cardNum)")
-        }
-        else if UserDefaults.standard.integer(forKey: "Y\(cardNum)") == year
-        {
-            if UserDefaults.standard.integer(forKey: "M\(cardNum)") < month
-            {
-                print("at month")
-                UserDefaults.standard.set(0, forKey: "SR\(cardNum)")
-            }
-            else if UserDefaults.standard.integer(forKey: "M\(cardNum)") == month
-            {
-                if UserDefaults.standard.integer(forKey: "D\(cardNum)") < day
-                {
-                    print("at day")
-                    UserDefaults.standard.set(0, forKey: "SR\(cardNum)")
-                }
-                else if UserDefaults.standard.integer(forKey: "D\(cardNum)") == day
-                {
-                    if UserDefaults.standard.integer(forKey: "H\(cardNum)") < hour
-                    {
-                        print("at hour")
-                        UserDefaults.standard.set(0, forKey: "SR\(cardNum)")
-                    }
-                    else if UserDefaults.standard.integer(forKey: "H\(cardNum)") == hour
-                    {
-                        if UserDefaults.standard.integer(forKey: "Min\(cardNum)") < minutes
-                        {
-                            print("at minutes")
-                            UserDefaults.standard.set(0, forKey: "SR\(cardNum)")
-                        }
-                    }
-                }
-            }
-        }
         if UserDefaults.standard.object(forKey: "savedFCard\(cardNum)") as? String == "" || UserDefaults.standard.object(forKey: "savedFCard\(cardNum)") as? String == nil
         {
             cardNum = 1
@@ -269,51 +183,8 @@ var check = ""
     @IBAction func PreviousCard(_ sender: Any) {
         cardNum -= 1
         
-        let date = Date()
-        let calendar = Calendar.current
-        let year = calendar.component(.year, from: date)
-        let month = calendar.component(.month, from: date)
-        let day = calendar.component(.day, from: date)
-        let hour = calendar.component(.hour, from: date)
-        let minutes = calendar.component(.minute, from: date)
-        
-        if UserDefaults.standard.integer(forKey: "Y\(cardNum)") < year
-        {
-            print("at Year")
-            UserDefaults.standard.set(0, forKey: "SR\(cardNum)")
-        }
-        else if UserDefaults.standard.integer(forKey: "Y\(cardNum)") == year
-        {
-            if UserDefaults.standard.integer(forKey: "M\(cardNum)") < month
-            {
-                print("at month")
-                UserDefaults.standard.set(0, forKey: "SR\(cardNum)")
-            }
-            else if UserDefaults.standard.integer(forKey: "M\(cardNum)") == month
-            {
-                if UserDefaults.standard.integer(forKey: "D\(cardNum)") < day
-                {
-                    print("at day")
-                    UserDefaults.standard.set(0, forKey: "SR\(cardNum)")
-                }
-                else if UserDefaults.standard.integer(forKey: "D\(cardNum)") == day
-                {
-                    if UserDefaults.standard.integer(forKey: "H\(cardNum)") < hour
-                    {
-                        print("at hour")
-                        UserDefaults.standard.set(0, forKey: "SR\(cardNum)")
-                    }
-                    else if UserDefaults.standard.integer(forKey: "H\(cardNum)") == hour
-                    {
-                        if UserDefaults.standard.integer(forKey: "Min\(cardNum)") < minutes
-                        {
-                            print("at minutes")
-                            UserDefaults.standard.set(0, forKey: "SR\(cardNum)")
-                        }
-                    }
-                }
-            }
-        }
+        getDateComponents()
+
         while UserDefaults.standard.integer(forKey: "SR\(cardNum)") != 0
         {
             cardNum -= 1
@@ -341,51 +212,8 @@ var check = ""
         
     }
     @IBAction func ShowBack(_ sender: Any) {
-        let date = Date()
-        let calendar = Calendar.current
-        let year = calendar.component(.year, from: date)
-        let month = calendar.component(.month, from: date)
-        let day = calendar.component(.day, from: date)
-        let hour = calendar.component(.hour, from: date)
-        let minutes = calendar.component(.minute, from: date)
         
-        if UserDefaults.standard.integer(forKey: "Y\(cardNum)") < year
-        {
-            print("at Year")
-            UserDefaults.standard.set(0, forKey: "SR\(cardNum)")
-        }
-        else if UserDefaults.standard.integer(forKey: "Y\(cardNum)") == year
-        {
-            if UserDefaults.standard.integer(forKey: "M\(cardNum)") < month
-            {
-                print("at month")
-                UserDefaults.standard.set(0, forKey: "SR\(cardNum)")
-            }
-            else if UserDefaults.standard.integer(forKey: "M\(cardNum)") == month
-            {
-                if UserDefaults.standard.integer(forKey: "D\(cardNum)") < day
-                {
-                    print("at day")
-                    UserDefaults.standard.set(0, forKey: "SR\(cardNum)")
-                }
-                else if UserDefaults.standard.integer(forKey: "D\(cardNum)") == day
-                {
-                    if UserDefaults.standard.integer(forKey: "H\(cardNum)") < hour
-                    {
-                        print("at hour")
-                        UserDefaults.standard.set(0, forKey: "SR\(cardNum)")
-                    }
-                    else if UserDefaults.standard.integer(forKey: "H\(cardNum)") == hour
-                    {
-                        if UserDefaults.standard.integer(forKey: "Min\(cardNum)") < minutes
-                        {
-                            print("at minutes")
-                            UserDefaults.standard.set(0, forKey: "SR\(cardNum)")
-                        }
-                    }
-                }
-            }
-        }
+        getDateComponents()
         
         if UserDefaults.standard.integer(forKey: "SR\(cardNum)") == 0
         {
@@ -404,60 +232,8 @@ var check = ""
     
     @IBAction func FailedCard(_ sender: Any) {
         
-        UserDefaults.standard.set(0, forKey: "SR\(cardNum)")
-        UserDefaults.standard.set(0, forKey: "Y\(cardNum)")
-        UserDefaults.standard.set(0, forKey: "M\(cardNum)")
-        UserDefaults.standard.set(0, forKey: "D\(cardNum)")
-        UserDefaults.standard.set(0, forKey: "H\(cardNum)")
-        UserDefaults.standard.set(0, forKey: "Min\(cardNum)")
-        UserDefaults.standard.set(1, forKey: "LastIncriment\(cardNum)")
-        cardNum += 1
-        
-        let date = Date()
-        let calendar = Calendar.current
-        let year = calendar.component(.year, from: date)
-        let month = calendar.component(.month, from: date)
-        let day = calendar.component(.day, from: date)
-        let hour = calendar.component(.hour, from: date)
-        let minutes = calendar.component(.minute, from: date)
-        
-        if UserDefaults.standard.integer(forKey: "Y\(cardNum)") < year
-        {
-            print("at Year")
-            UserDefaults.standard.set(0, forKey: "SR\(cardNum)")
-        }
-        else if UserDefaults.standard.integer(forKey: "Y\(cardNum)") == year
-        {
-            if UserDefaults.standard.integer(forKey: "M\(cardNum)") < month
-            {
-                print("at month")
-                UserDefaults.standard.set(0, forKey: "SR\(cardNum)")
-            }
-            else if UserDefaults.standard.integer(forKey: "M\(cardNum)") == month
-            {
-                if UserDefaults.standard.integer(forKey: "D\(cardNum)") < day
-                {
-                    print("at day")
-                    UserDefaults.standard.set(0, forKey: "SR\(cardNum)")
-                }
-                else if UserDefaults.standard.integer(forKey: "D\(cardNum)") == day
-                {
-                    if UserDefaults.standard.integer(forKey: "H\(cardNum)") < hour
-                    {
-                        print("at hour")
-                        UserDefaults.standard.set(0, forKey: "SR\(cardNum)")
-                    }
-                    else if UserDefaults.standard.integer(forKey: "H\(cardNum)") == hour
-                    {
-                        if UserDefaults.standard.integer(forKey: "Min\(cardNum)") < minutes
-                        {
-                            print("at minutes")
-                            UserDefaults.standard.set(0, forKey: "SR\(cardNum)")
-                        }
-                    }
-                }
-            }
-        }
+        getDateComponents()
+         
         if UserDefaults.standard.object(forKey: "savedFCard\(cardNum)") as? String == "" || UserDefaults.standard.object(forKey: "savedFCard\(cardNum)") as? String == nil
         {
             cardNum = 1
@@ -489,115 +265,25 @@ var check = ""
     }
     
     @IBAction func HardCard(_ sender: Any) {
-        UserDefaults.standard.set(1, forKey: "SR\(cardNum)")
-        let date = Date()
-        let calendar = Calendar.current
-        let year = calendar.component(.year, from: date)
-        let month = calendar.component(.month, from: date)
-        let day = calendar.component(.day, from: date)
-        let hour = calendar.component(.hour, from: date)
-        let minutes = calendar.component(.minute, from: date)
-        print("year: \(year) month: \(month)  day: \(day)   hour: \(hour)   minutes: \(minutes)")
-        var newMin = minutes
-        var newH = hour
-        var newD = day
-        var newM = month
-        var newY = year
-        let addTo = UserDefaults.standard.integer(forKey: "LastIncriment\(cardNum)")
-        UserDefaults.standard.set((addTo), forKey: "LastIncriment\(cardNum)")
-        if newMin + addTo >= 60
-        {
-            newMin = 0
-            newH = hour + 1
-            if newH >= 24
-            {
-                newH = 0
-                newD = day + 1
-             // have to make it specific to each month
-            }
-        }
-        else
-        {
-            newMin += addTo
-        }
-        UserDefaults.standard.set(newY, forKey: "Y\(cardNum)")
-        UserDefaults.standard.set(newM, forKey: "M\(cardNum)")
-        UserDefaults.standard.set(newD, forKey: "D\(cardNum)")
-        UserDefaults.standard.set(newH, forKey: "H\(cardNum)")
-        UserDefaults.standard.set(newMin, forKey: "Min\(cardNum)")
-        cardNum += 1
-        
        
-        
-        if UserDefaults.standard.integer(forKey: "Y\(cardNum)") < year
-        {
-            print("at Year")
-            UserDefaults.standard.set(0, forKey: "SR\(cardNum)")
-        }
-        else if UserDefaults.standard.integer(forKey: "Y\(cardNum)") == year
-        {
-            if UserDefaults.standard.integer(forKey: "M\(cardNum)") < month
-            {
-                print("at month")
-                UserDefaults.standard.set(0, forKey: "SR\(cardNum)")
-            }
-            else if UserDefaults.standard.integer(forKey: "M\(cardNum)") == month
-            {
-                if UserDefaults.standard.integer(forKey: "D\(cardNum)") < day
-                {
-                    print("at day")
-                    UserDefaults.standard.set(0, forKey: "SR\(cardNum)")
-                }
-                else if UserDefaults.standard.integer(forKey: "D\(cardNum)") == day
-                {
-                    if UserDefaults.standard.integer(forKey: "H\(cardNum)") < hour
-                    {
-                        print("at hour")
-                        UserDefaults.standard.set(0, forKey: "SR\(cardNum)")
-                    }
-                    else if UserDefaults.standard.integer(forKey: "H\(cardNum)") == hour
-                    {
-                        if UserDefaults.standard.integer(forKey: "Min\(cardNum)") < minutes
-                        {
-                            print("at minutes")
-                            UserDefaults.standard.set(0, forKey: "SR\(cardNum)")
-                        }
-                    }
-                }
-            }
-        }
-        if UserDefaults.standard.object(forKey: "savedFCard\(cardNum)") as? String == "" || UserDefaults.standard.object(forKey: "savedFCard\(cardNum)") as? String == nil
-        {
-            cardNum = 1
-        }
-        while UserDefaults.standard.integer(forKey: "SR\(cardNum)") != 0
-        {
-            cardNum += 1
-        }
-        if UserDefaults.standard.integer(forKey: "SR\(cardNum)") == 0
-        {
-            FrontCardDisplay.text = UserDefaults.standard.object(forKey: "savedFCard\(cardNum)") as? String
-            BackCardDisplay.text = ""
-            
-        }
-        else
-        {
-            FrontCardDisplay.text = ""
-            BackCardDisplay.text = ""
-        }
-        if UserDefaults.standard.integer(forKey: "LastIncriment\(cardNum)") == 0 && UserDefaults.standard.object(forKey: "savedFCard\(cardNum)") as? String != "" && UserDefaults.standard.object(forKey: "savedFCard\(cardNum)") != nil
-        {
-            UserDefaults.standard.set(1, forKey: "LastIncriment\(cardNum)")
-        }
-        NumCard.text = String(cardNum)
-        HardSR.text = "+ \(UserDefaults.standard.integer(forKey: "LastIncriment\(cardNum)") * 1)"
-        MediumSR.text = "+\(UserDefaults.standard.integer(forKey: "LastIncriment\(cardNum)") * 2)"
-        EasySR.text = "+ \(UserDefaults.standard.integer(forKey: "LastIncriment\(cardNum)") * 3)"
+        getDifficultyLevel(incriment: 1)
+
     
     }
     
     @IBAction func MediumCard(_ sender: Any) {
-        UserDefaults.standard.set(2, forKey: "SR\(cardNum)")
+        
+        getDifficultyLevel(incriment: 2)
+        
+    }
+    
+    @IBAction func EasyCard(_ sender: Any) {
+        
+        getDifficultyLevel(incriment: 3)
+    }
+    
+    func getDateComponents()
+    {
         let date = Date()
         let calendar = Calendar.current
         let year = calendar.component(.year, from: date)
@@ -605,37 +291,6 @@ var check = ""
         let day = calendar.component(.day, from: date)
         let hour = calendar.component(.hour, from: date)
         let minutes = calendar.component(.minute, from: date)
-        print("year: \(year) month: \(month)  day: \(day)   hour: \(hour)   minutes: \(minutes)")
-        var newMin = minutes
-        var newH = hour
-        var newD = day
-        var newM = month
-        var newY = year
-        let addTo = UserDefaults.standard.integer(forKey: "LastIncriment\(cardNum)")
-        UserDefaults.standard.set((addTo * 2), forKey: "LastIncriment\(cardNum)")
-        if newMin + (2 * addTo) >= 60
-        {
-            newMin = 0
-            newH = hour + 1
-            if newH >= 24
-            {
-                newH = 0
-                newD = day + 1
-             // have to make it specific to each month
-            }
-        }
-        else
-        {
-            newMin += 2 * addTo
-        }
-        UserDefaults.standard.set(newY, forKey: "Y\(cardNum)")
-        UserDefaults.standard.set(newM, forKey: "M\(cardNum)")
-        UserDefaults.standard.set(newD, forKey: "D\(cardNum)")
-        UserDefaults.standard.set(newH, forKey: "H\(cardNum)")
-        UserDefaults.standard.set(newMin, forKey: "Min\(cardNum)")
-        cardNum += 1
-        
-      
         
         if UserDefaults.standard.integer(forKey: "Y\(cardNum)") < year
         {
@@ -674,37 +329,11 @@ var check = ""
                 }
             }
         }
-        if UserDefaults.standard.object(forKey: "savedFCard\(cardNum)") as? String == "" || UserDefaults.standard.object(forKey: "savedFCard\(cardNum)") as? String == nil
-        {
-            cardNum = 1
-        }
-        while UserDefaults.standard.integer(forKey: "SR\(cardNum)") != 0
-        {
-            cardNum += 1
-        }
-        if UserDefaults.standard.integer(forKey: "SR\(cardNum)") == 0
-        {
-            FrontCardDisplay.text = UserDefaults.standard.object(forKey: "savedFCard\(cardNum)") as? String
-            BackCardDisplay.text = ""
-            
-        }
-        else
-        {
-            FrontCardDisplay.text = ""
-            BackCardDisplay.text = ""
-        }
-        if UserDefaults.standard.integer(forKey: "LastIncriment\(cardNum)") == 0 && UserDefaults.standard.object(forKey: "savedFCard\(cardNum)") as? String != "" && UserDefaults.standard.object(forKey: "savedFCard\(cardNum)") != nil
-        {
-            UserDefaults.standard.set(1, forKey: "LastIncriment\(cardNum)")
-        }
-        NumCard.text = String(cardNum)
-        HardSR.text = "+ \(UserDefaults.standard.integer(forKey: "LastIncriment\(cardNum)") * 1)"
-        MediumSR.text = "+\(UserDefaults.standard.integer(forKey: "LastIncriment\(cardNum)") * 2)"
-        EasySR.text = "+ \(UserDefaults.standard.integer(forKey: "LastIncriment\(cardNum)") * 3)"
     }
     
-    @IBAction func EasyCard(_ sender: Any) {
-        UserDefaults.standard.set(3, forKey: "SR\(cardNum)")
+    func getDifficultyLevel(incriment: Int)
+    {
+        UserDefaults.standard.set(incriment, forKey: "SR\(cardNum)")
         let date = Date()
         let calendar = Calendar.current
         let year = calendar.component(.year, from: date)
@@ -720,7 +349,7 @@ var check = ""
         var newY = year
         let addTo = UserDefaults.standard.integer(forKey: "LastIncriment\(cardNum)")
         UserDefaults.standard.set((addTo * 3), forKey: "LastIncriment\(cardNum)")
-        if newMin + (3 * addTo) >= 60
+        if newMin + (incriment * addTo) >= 60
         {
             newMin = 0
             newH = hour + 1
@@ -733,7 +362,7 @@ var check = ""
         }
         else
         {
-            newMin += 3 * addTo
+            newMin += incriment * addTo
         }
         UserDefaults.standard.set(newY, forKey: "Y\(cardNum)")
         UserDefaults.standard.set(newM, forKey: "M\(cardNum)")
@@ -808,8 +437,8 @@ var check = ""
         MediumSR.text = "+\(UserDefaults.standard.integer(forKey: "LastIncriment\(cardNum)") * 2)"
         EasySR.text = "+ \(UserDefaults.standard.integer(forKey: "LastIncriment\(cardNum)") * 3)"
         
+        
     }
-
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         NumCard.resignFirstResponder()
