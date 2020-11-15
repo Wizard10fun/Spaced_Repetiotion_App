@@ -7,10 +7,6 @@
 
 import UIKit
 
-
-
-
-
 class ThirdViewController: UIViewController {
 var check = ""
     
@@ -116,16 +112,6 @@ var check = ""
             I += 1
         }
         
-        
-      //  if !(EnglishCard.isEmpty)
-      //  {
-        //    UserDefaults.standard.set(EnglishCard, forKey: "savedCard2")
-       // }
-      //  EnglishC = UserDefaults.standard.object(forKey: "savedECard") as! String
-    //    FrenchC = UserDefaults.standard.object(forKey: "savedFCard") as! String
-        
-     //   EnglishCardDisplay.text = EnglishC
-     //   FrenchCardDisplay.text = FrenchC
     }
     
     @IBAction func ShowCard(_ sender: Any) {
@@ -823,27 +809,12 @@ var check = ""
         EasySR.text = "+ \(UserDefaults.standard.integer(forKey: "LastIncriment\(cardNum)") * 3)"
         
     }
-    
-    
-    
-   
-    
+
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         NumCard.resignFirstResponder()
     
     }
-    
-    
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }
 
