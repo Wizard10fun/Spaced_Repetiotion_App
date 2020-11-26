@@ -17,6 +17,11 @@ class SecondViewController: UIViewController {
     @IBOutlet weak var Front_Word: UITextField!
     @IBOutlet weak var Back_Word: UITextField!
     @IBOutlet weak var CardN: UITextField!
+    @IBOutlet var table: UITableView!
+    @IBOutlet var tableView: UITableView!
+    
+    var listCount = 1
+    var canContinue = true
     
     @IBOutlet weak var Translation_Displayed: UITextView!
   
@@ -25,17 +30,33 @@ class SecondViewController: UIViewController {
         
         Front_Word.delegate = self
         Back_Word.delegate = self
+        
+        tableView.delegate = self
+        tableView.dataSource = self
+        
+        listCount = 1
+        canContinue = true
+        
+        while canContinue == true
+        {
+            if UserDefaults.standard.object(forKey: "savedFCard\(listCount)") as? String == "" || UserDefaults.standard.object(forKey: "savedFCard\(listCount)") as? String == nil
+            {
+                canContinue = false
+            }
+            listCount += 1
+        }
     
     }
+    
     
     @IBAction func Save_Card(_ sender: Any) {
         
         print(r)
         
        
-        if !(cards[r].frontWord.isEmpty) && !(cards[r].backWord.isEmpty)
+        if !(Front_Word.text!.isEmpty) && !(Back_Word.text!.isEmpty)
         {
-            Translation_Displayed.text = "\(cards[r].frontWord)   \(cards[r].backWord)"
+            Translation_Displayed.text = "\(Front_Word.text!)   \(Back_Word.text!)"
         }
         else
         {
@@ -53,10 +74,22 @@ class SecondViewController: UIViewController {
         }
         
         UserDefaults.standard.set(0, forKey: "LastIncriment\(i)")
-        UserDefaults.standard.set(cards[r].frontWord, forKey: "savedFCard\(i)")
-        UserDefaults.standard.set(cards[r].backWord, forKey: "savedBCard\(i)")
+        UserDefaults.standard.set(Front_Word.text!, forKey: "savedFCard\(i)")
+        UserDefaults.standard.set(Back_Word.text!, forKey: "savedBCard\(i)")
         
         r += 1
+    
+        listCount = 1
+        canContinue = true
+        
+        while canContinue == true
+        {
+            if UserDefaults.standard.object(forKey: "savedFCard\(listCount)") as? String == "" || UserDefaults.standard.object(forKey: "savedFCard\(listCount)") as? String == nil
+            {
+                canContinue = false
+            }
+            listCount += 1
+        }
     
     }
     
@@ -104,6 +137,19 @@ class SecondViewController: UIViewController {
         }
         UserDefaults.standard.set(0, forKey: "LastIncriment\(cardNum)")
         
+        listCount = 1
+        canContinue = true
+        
+        while canContinue == true
+        {
+            if UserDefaults.standard.object(forKey: "savedFCard\(listCount)") as? String == "" || UserDefaults.standard.object(forKey: "savedFCard\(listCount)") as? String == nil
+            {
+                canContinue = false
+            }
+            listCount += 1
+        }
+    
+        
     }
     
     
@@ -112,6 +158,8 @@ class SecondViewController: UIViewController {
         CardN.resignFirstResponder()
     }
     
+   
+   
 }
 
 extension SecondViewController : UITextFieldDelegate {
@@ -120,4 +168,29 @@ extension SecondViewController : UITextFieldDelegate {
         Translation_Displayed.resignFirstResponder()
         return true
     }
+}
+
+extension SecondViewController: UITableViewDelegate {
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        print("you tapped me!")
+    }
+}
+
+extension SecondViewController: UITableViewDataSource {
+    
+    
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return (listCount - 1)
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
+        
+        cell.textLabel?.text = UserDefaults.standard.object(forKey: "savedFCard\(indexPath.row + 1)") as? String
+        
+        return cell
+    }
+    
 }

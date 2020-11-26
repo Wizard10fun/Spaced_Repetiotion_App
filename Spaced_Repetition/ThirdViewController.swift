@@ -157,25 +157,7 @@ var check = ""
         {
             cardNum += 1
         }
-        if UserDefaults.standard.integer(forKey: "SR\(cardNum)") == 0
-        {
-            FrontCardDisplay.text = UserDefaults.standard.object(forKey: "savedFCard\(cardNum)") as? String
-            BackCardDisplay.text = ""
-            
-        }
-        else
-        {
-            FrontCardDisplay.text = ""
-            BackCardDisplay.text = ""
-        }
-        if UserDefaults.standard.integer(forKey: "LastIncriment\(cardNum)") == 0 && UserDefaults.standard.object(forKey: "savedFCard\(cardNum)") as? String != "" && UserDefaults.standard.object(forKey: "savedFCard\(cardNum)") != nil
-        {
-            UserDefaults.standard.set(1, forKey: "LastIncriment\(cardNum)")
-        }
-        NumCard.text = String(cardNum)
-        HardSR.text = "+ \(UserDefaults.standard.integer(forKey: "LastIncriment\(cardNum)") * 1)"
-        MediumSR.text = "+\(UserDefaults.standard.integer(forKey: "LastIncriment\(cardNum)") * 2)"
-        EasySR.text = "+ \(UserDefaults.standard.integer(forKey: "LastIncriment\(cardNum)") * 3)"
+        NextorPreviousCard()
         
         
     }
@@ -189,26 +171,7 @@ var check = ""
         {
             cardNum -= 1
         }
-        if UserDefaults.standard.integer(forKey: "SR\(cardNum)") == 0
-        {
-            FrontCardDisplay.text = UserDefaults.standard.object(forKey: "savedFCard\(cardNum)") as? String
-            BackCardDisplay.text = ""
-        }
-        else
-        {
-            FrontCardDisplay.text = ""
-            BackCardDisplay.text = ""
-            
-        }
-        if UserDefaults.standard.integer(forKey: "LastIncriment\(cardNum)") == 0 && UserDefaults.standard.object(forKey: "savedFCard\(cardNum)") as? String != ""
-        {
-            UserDefaults.standard.set(0, forKey: "LastIncriment\(cardNum)")
-        }
-        
-        NumCard.text = String(cardNum)
-        HardSR.text = "+ \(UserDefaults.standard.integer(forKey: "LastIncriment\(cardNum)") * 1)"
-        MediumSR.text = "+ \(UserDefaults.standard.integer(forKey: "LastIncriment\(cardNum)") * 2)"
-        EasySR.text = "+ \(UserDefaults.standard.integer(forKey: "LastIncriment\(cardNum)") * 3)"
+        NextorPreviousCard()
         
     }
     @IBAction func ShowBack(_ sender: Any) {
@@ -267,7 +230,6 @@ var check = ""
     @IBAction func HardCard(_ sender: Any) {
        
         getDifficultyLevel(incriment: 1)
-
     
     }
     
@@ -437,6 +399,30 @@ var check = ""
         MediumSR.text = "+\(UserDefaults.standard.integer(forKey: "LastIncriment\(cardNum)") * 2)"
         EasySR.text = "+ \(UserDefaults.standard.integer(forKey: "LastIncriment\(cardNum)") * 3)"
         
+        
+    }
+    
+    func NextorPreviousCard()
+    {
+        if UserDefaults.standard.integer(forKey: "SR\(cardNum)") == 0
+        {
+            FrontCardDisplay.text = UserDefaults.standard.object(forKey: "savedFCard\(cardNum)") as? String
+            BackCardDisplay.text = ""
+            
+        }
+        else
+        {
+            FrontCardDisplay.text = ""
+            BackCardDisplay.text = ""
+        }
+        if UserDefaults.standard.integer(forKey: "LastIncriment\(cardNum)") == 0 && UserDefaults.standard.object(forKey: "savedFCard\(cardNum)") as? String != "" && UserDefaults.standard.object(forKey: "savedFCard\(cardNum)") != nil
+        {
+            UserDefaults.standard.set(1, forKey: "LastIncriment\(cardNum)")
+        }
+        NumCard.text = String(cardNum)
+        HardSR.text = "+ \(UserDefaults.standard.integer(forKey: "LastIncriment\(cardNum)") * 1)"
+        MediumSR.text = "+\(UserDefaults.standard.integer(forKey: "LastIncriment\(cardNum)") * 2)"
+        EasySR.text = "+ \(UserDefaults.standard.integer(forKey: "LastIncriment\(cardNum)") * 3)"
         
     }
     
