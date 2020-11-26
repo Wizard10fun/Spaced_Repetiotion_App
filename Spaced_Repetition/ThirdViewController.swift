@@ -6,6 +6,8 @@
 //
 
 import UIKit
+var randCheckForEndCard = 0
+
 
 class ThirdViewController: UIViewController {
 var check = ""
@@ -146,18 +148,32 @@ var check = ""
     @IBAction func NextCard(_ sender: Any) {
         
         cardNum += 1
+        randCheckForEndCard = 0
         
         getDateComponents()
         
         if UserDefaults.standard.object(forKey: "savedFCard\(cardNum)") as? String == "" || UserDefaults.standard.object(forKey: "savedFCard\(cardNum)") as? String == nil
         {
+            print("I set it")
             cardNum = 1
         }
         while UserDefaults.standard.integer(forKey: "SR\(cardNum)") != 0
         {
             cardNum += 1
         }
+        if randCheckForEndCard == 1
+        {
+            cardNum += 1
+        }
+        
+        if UserDefaults.standard.object(forKey: "savedFCard\(cardNum)") as? String == "" || UserDefaults.standard.object(forKey: "savedFCard\(cardNum)") as? String == nil
+        {
+            print("I set it")
+            cardNum = 1
+        }
+      
         NextorPreviousCard()
+        
         
         
     }
@@ -287,6 +303,11 @@ var check = ""
                             print("at minutes")
                             UserDefaults.standard.set(0, forKey: "SR\(cardNum)")
                         }
+                    }
+                    else
+                    {
+                        randCheckForEndCard = 1
+                        print("yessirrr")
                     }
                 }
             }

@@ -17,11 +17,12 @@ class SecondViewController: UIViewController {
     @IBOutlet weak var Front_Word: UITextField!
     @IBOutlet weak var Back_Word: UITextField!
     @IBOutlet weak var CardN: UITextField!
-    @IBOutlet var table: UITableView!
     @IBOutlet var tableView: UITableView!
     
     var listCount = 1
     var canContinue = true
+    
+    
     
     @IBOutlet weak var Translation_Displayed: UITextView!
   
@@ -188,7 +189,9 @@ extension SecondViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
         
-        cell.textLabel?.text = UserDefaults.standard.object(forKey: "savedFCard\(indexPath.row + 1)") as? String
+        let F = UserDefaults.standard.object(forKey: "savedFCard\(indexPath.row + 1)")
+        let B = UserDefaults.standard.object(forKey: "savedBCard\(indexPath.row + 1)")
+        cell.textLabel?.text = "Front: \(F!)     Back: \(B!)"
         
         return cell
     }
